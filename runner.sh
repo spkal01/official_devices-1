@@ -67,7 +67,9 @@ if [[ ! "$COMMIT_MESSAGE" =~ "[Spark-CI]" ]] && [ -n "$GIT_CHECK" ]; then
     git add .
     git commit -m "[Spark-CI]: ${COMMIT_MESSAGE}" --author="${COMMIT_AUTHOR}" --signoff
     git remote rm origin
-    git remote add origin https://spkal01:"${GH_PERSONAL_TOKEN}"@github.com/Spark-Devices/official_devices.git
+    git remote add origin https://github.com/Spark-Devices/official_devices.git
+    git config --global user.password $GH_PERSONAL_TOKEN
+    git config --global user.name spkal01
     git push -f origin fire
     sendAdmins "JSON Linted and Force Pushed!"
 fi
