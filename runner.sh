@@ -10,11 +10,11 @@ COMMIT_SMALL_HASH="$(git rev-parse --short HEAD)"
 COMMIT_HASH="$(git rev-parse --verify HEAD)"
 
 function sendAdmins() {
-    curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendmessage" --data "text=${*}&chat_id=-1001148005546&parse_mode=Markdown"
+    curl -s "https://api.telegram.org/bot1658104048:AAHTdVR6CoxKagmJzLlOTmJhd0pBK0N1pDM/sendmessage" --data "text=${*}&chat_id=-1001148005546&parse_mode=Markdown"
 }
 
 function sendMaintainers() {
-    curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendmessage" --data "text=${*}&chat_id=-1001148005546&&parse_mode=Markdown"
+    curl -s "https://api.telegram.org/bot1658104048:AAHTdVR6CoxKagmJzLlOTmJhd0pBK0N1pDM/sendmessage" --data "text=${*}&chat_id=-1001148005546&&parse_mode=Markdown"
 }
 
 printf "\n\n***Spark CI***\n\n"
@@ -24,8 +24,6 @@ if [ -n "$PULL_REQUEST_NUMBER" ]; then
     sendAdmins "\`I have recieved PR $PULL_REQUEST_NUMBER.\`"
     sendMaintainers "\`I have recieved PR $PULL_REQUEST_NUMBER.\`"
 else
-    git checkout fire  > /dev/null
-    git pull origin fire  > /dev/null
     sendAdmins "**I am building fire branch job.** %0A**Commit Point:** [${COMMIT_SMALL_HASH}](https://github.com/SPark-Devices/official_devices/commit/${COMMIT_HASH})"
 fi
 
